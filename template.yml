@@ -10,10 +10,10 @@ on:
 
 jobs:
   review:
-    uses: lerepo
+    uses: virtual-imaging-platform/vip-github-actions/.github/workflows/pmd.yml@develop
     with:
       quality: 95
   
   build:
-    uses: lerepo
+    uses: virtual-imaging-platform/vip-github-actions/.github/workflows/maven.yml@develop
   
