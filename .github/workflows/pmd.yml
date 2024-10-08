@@ -52,6 +52,6 @@ jobs:
           quality_score=$((100 - (violations / total * 100)))
           echo -e "Detailled score\nviolations: $violations\ntotal: $total\nquality: $quality_score"
           if [ "$quality_score" -lt $quality ]; then
-            echo "Code quality is below threshold. Failing the build."
+            echo "Code quality is below the limit. Failing the build."
             exit 1
           fi
