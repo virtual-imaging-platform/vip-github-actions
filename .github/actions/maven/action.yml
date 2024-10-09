@@ -1,26 +1,11 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+name: Java Build & Nexus
+description: Build the project with maven and push in some case to the jar to the nexus.
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Java CI with Maven
-
-on:
-  workflow_call:
-
-env: # beware env value are of string type, not boolean. Need to use fromJSON to convert them to boolean
-  isProduction: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
-  prepareRelease: ${{ github.event_name == 'push' && github.ref_name == 'develop' && contains(github.event.head_commit.message, 'prepare release') }}
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
+runs:
+  using: "composite"
+  
+  steps:
+    - uses: actions/checkout@v4
 
     # Code analysis init (build must me after and before the analyse)
     - name: Initialize CodeQL
@@ -38,9 +23,10 @@ jobs:
         server-id: ${{ (fromJSON(env.isProduction) && 'creatis-releases') || 'creatis-snapshots' }}
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
-  
+        
+    # deploy only for pushes on develop and master, et verify for PRs
     - name: Build with Maven
-      # deploy only for pushes on develop and master, et verify for PRs
+      shell: bash
       run: mvn -B clean ${{ env.mavenTarget }}
       env:
         MAVEN_USERNAME: github
