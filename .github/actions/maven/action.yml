@@ -1,6 +1,11 @@
 name: Java Build & Nexus
 description: Build the project with maven and push in some case to the jar to the nexus.
 
+inputs:
+  maven_password:
+    description: "nexus password"
+    required: true
+
 runs:
   using: "composite"
   
@@ -30,7 +35,7 @@ runs:
       run: mvn -B clean ${{ env.mavenTarget }}
       env:
         MAVEN_USERNAME: github
-        MAVEN_PASSWORD: ${{ secrets.NEXUS_PSW }}
+        MAVEN_PASSWORD: ${{ inputs.NEXUS_PSW }}
         mavenTarget: ${{ github.event_name == 'push' && ! fromJSON(env.prepareRelease) && 'deploy' || 'verify' }}
 
     - name: Publish Test Report
