@@ -29,7 +29,7 @@ runs:
     - name: Calculate Lines of Code
       shell: bash
       run: |
-        total_lines=$(find src/ -name '*.java' -print0 | xargs -0 wc -l | awk '{total += $1} END {print total}')
+        total_lines=$(find . -name '*.java' -print0 | xargs -0 wc -l | awk '{total += $1} END {print total}')
         echo "total=$total_lines" >> $GITHUB_ENV
       
     - name: Calculate the code quality base on previous results.
