@@ -35,7 +35,7 @@ runs:
       run: mvn -B clean ${{ env.mavenTarget }}
       env:
         MAVEN_USERNAME: github
-        MAVEN_PASSWORD: ${{ inputs.NEXUS_PSW }}
+        MAVEN_PASSWORD: ${{ inputs.maven_password }}
         mavenTarget: ${{ github.event_name == 'push' && ! fromJSON(env.prepareRelease) && 'deploy' || 'verify' }}
 
     - name: Publish Test Report
