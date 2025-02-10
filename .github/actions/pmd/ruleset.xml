@@ -46,7 +46,7 @@
 	<rule ref="category/java/performance.xml/InsufficientStringBufferDeclaration"/>
 	<rule ref="category/java/performance.xml/StringInstantiation"/>
 	<rule ref="category/java/performance.xml/StringToString"/>
-	<rule ref="category/java/performance.xml/TooFewBranchesForASwitchStatement"/>
+	<rule ref="category/java/performance.xml/TooFewBranchesForSwitch"/>
 	<rule ref="category/java/performance.xml/UseStringBufferForStringAppends"/>
 	<rule ref="category/java/performance.xml/UseStringBufferLength"/>
 	
