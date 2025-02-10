@@ -110,7 +110,7 @@
 	<rule ref="category/java/errorprone.xml/EmptyFinalizer"/>
 	<rule ref="category/java/errorprone.xml/MissingStaticMethodInNonInstantiatableClass"/>
 	<rule ref="category/java/errorprone.xml/MoreThanOneLogger"/>
-	<rule ref="category/java/errorprone.xml/NonCaseLabelInSwitchStatement"/>
+	<rule ref="category/java/errorprone.xml/NonCaseLabelInSwitch"/>
 	<rule ref="category/java/errorprone.xml/SingleMethodSingleton"/>
 	<rule ref="category/java/errorprone.xml/UnnecessaryCaseChange"/>
 	<rule ref="category/java/performance.xml/AddEmptyString"/>
@@ -123,7 +123,7 @@
 	<rule ref="category/java/codestyle.xml/MethodArgumentCouldBeFinal"/>
 	<rule ref="category/java/bestpractices.xml/MethodReturnsInternalArray"/>
 	<rule ref="category/java/bestpractices.xml/WhileLoopWithLiteralBoolean"/>
-	<rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault"/>
+	<rule ref="category/java/bestpractices.xml/NonExhaustiveSwitch"/>
 	<rule ref="category/java/codestyle.xml/EmptyControlStatement"/>
 	<rule ref="category/java/codestyle.xml/TooManyStaticImports"/>
 	<rule ref="category/java/design.xml/AvoidThrowingRawExceptionTypes"/>
