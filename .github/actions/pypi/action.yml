@@ -35,7 +35,7 @@ runs:
       run: uv python install
 
     - name: Define artifact version
-      if: ${{ !inputs.is_release }}
+      if: ${{ inputs.is_release == "false" }}
       shell: bash
       run: uv version "$(uv version --short).dev$(date +%Y%m%d%H%M%S)"
 
