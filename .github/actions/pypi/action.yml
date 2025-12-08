@@ -1,0 +1,54 @@
+name: Python Nexus
+description: Deploy the project build to nexus
+
+inputs:
+  # we reuse the same account for mvn
+  maven_password: 
+    description: "nexus password"
+    required: true
+
+  is_release:
+    description: "If false, then a timestamp will be added to version before pushing"
+    default: false
+    required: false
+    type: boolean
+
+runs:
+  using: composite
+
+  steps:
+    - uses: actions/checkout@v5
+
+    # Code analysis init (build must me after and before the analyse)
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v4
+      with:
+        languages: python
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+      with:
+        version: "0.9.15"
+
+    - name: Set up Python
+      shell: bash
+      run: uv python install
+
+    - name: Define artifact version
+      if: ${{ !inputs.is_release }}
+      shell: bash
+      run: uv version "$(uv version --short).dev$(date +%Y%m%d%H%M%S)"
+
+    - name: Build project
+      shell: bash
+      run: uv build
+
+    - name: Upload to nexus
+      shell: bash
+      run: uv publish --index nexus-snapshots
+      env:
+        UV_PUBLISH_USERNAME: github
+        UV_PUBLISH_PASSWORD: ${{ inputs.maven_password }}
+
+    - name: CodeQL Analysis
+      uses: github/codeql-action/analyze@v4
