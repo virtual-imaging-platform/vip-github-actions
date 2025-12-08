@@ -35,9 +35,13 @@ runs:
       run: uv python install
 
     - name: Define artifact version
-      if: ${{ inputs.is_release == "false" }}
       shell: bash
-      run: uv version "$(uv version --short).dev$(date +%Y%m%d%H%M%S)"
+      run: |
+        if [ "${{ inputs.is_release }}" = "false" ]; then
+          uv version "$(uv version --short).dev$(date +%Y%m%d%H%M%S)"
+        else
+          echo "Release mode, no timestamp applied!"
+        fi
 
     - name: Build project
       shell: bash
