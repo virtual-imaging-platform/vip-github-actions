@@ -14,7 +14,7 @@ runs:
 
     # Code analysis init (build must me after and before the analyse)
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
+      uses: github/codeql-action/init@v4
       with:
         languages: java
 
